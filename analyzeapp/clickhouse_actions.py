@@ -11,7 +11,7 @@ django.setup()
 from infi.clickhouse_orm.database import Database
 
 from dataclick.settings import LOGGING_LEVEL, LOGGING_FILENAME, CLICKHOUSE_DB_URL, CLICKHOUSE_DB_USERNAME, \
-    CLICKHOUSE_DB_PASS, LOGGING_DATEFMT
+    CLICKHOUSE_DB_PASS, LOGGING_DATEFMT, CLICKHOUSE_DB_NAME
 from analyzeapp.clickhouse_models import DataclickStat
 from tasksapp.models import Event
 
@@ -19,7 +19,7 @@ logging.basicConfig(level=LOGGING_LEVEL, filename=LOGGING_FILENAME, datefmt=LOGG
 
 
 class ClickHouseActions:
-    db = Database('dataclick_stat', db_url=CLICKHOUSE_DB_URL, username=CLICKHOUSE_DB_USERNAME,
+    db = Database(CLICKHOUSE_DB_NAME, db_url=CLICKHOUSE_DB_URL, username=CLICKHOUSE_DB_USERNAME,
                   password=CLICKHOUSE_DB_PASS)
     event_record_schema = {
         'time': 'time',
