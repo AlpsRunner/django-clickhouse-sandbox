@@ -62,9 +62,9 @@ simple project to learn how gather and send statistics from django to clickhouse
     celery -A dataclick worker --concurrency=1
 ```
 
-Then visit [http://127.0.0.1:8000/index/](http://127.0.0.1:8000/).
+Then visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 or
-[http://<server-IP>:8000/index/](http://<server-IP>:8000/).
+[http://<server-IP>:8000/](http://<server-IP>:8000/).
 You will see statistics of sumulation.
 
 # Technical Details:
