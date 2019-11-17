@@ -53,7 +53,7 @@ class ClickHouseActions:
 
     def gather_data(self, limit=None):
         """
-        Gathers not sended data and creates list of ClickHouse Objects in memory
+        Gathers not sended data and creates list of events id to send
         """
         if DataclickStat.objects_in(self.db).count():
             last_sended_record = DataclickStat.objects_in(self.db).order_by('-event_id')[0]
@@ -67,7 +67,7 @@ class ClickHouseActions:
 
     def send_data(self):
         """
-        Sends all data in list of ClickHouse Objects to ClickHouse DB
+        Sends all of events in 'to_send__events_id' to ClickHouse DB
         """
         counter = 0
         if self.to_send__events_id:
@@ -83,7 +83,7 @@ class ClickHouseActions:
 
     def send_chunck(self):
         """
-        Sends to ClickHouse chunck of data in list of ClickHouse Objects to be sended
+        Sends to ClickHouse chunck from 'to_send__events_id'
         """
         events = Event.objects.filter(
             pk__in=self.to_send__events_id__chunk
@@ -120,7 +120,7 @@ class ClickHouseActions:
 
     def load_data(self):
         """
-        Loads all data from ClickHouse DB
+        Loads  ClickHouse DB records counter
         """
         clickhouse_records = DataclickStat.objects_in(self.db)
         logging.info(f'found in ClickHouse {clickhouse_records.count()} records')
