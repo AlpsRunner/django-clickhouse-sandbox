@@ -115,12 +115,12 @@ CELERY_TIMEZONE = 'UTC'
 CELERY_BEAT_SCHEDULE = {
     'simulate-user-activity': {
         'task': 'tasksapp.tasks.simulate_user_activity',
-        'schedule': crontab(minute='*/3'),  # do it every minute
+        'schedule': crontab(minute='*/1'),  # do it every minute
         'kwargs': {'events_to_create': 1000},
     },
     'gather-and-send-data': {
         'task': 'analyzeapp.tasks.gather_and_send_data',
-        'schedule': crontab(minute='*/1'),  # do it every 5 minute
+        'schedule': crontab(minute='*/5'),  # do it every 5 minute
     }
 }
 
@@ -132,3 +132,4 @@ CLICKHOUSE_DB_PORT = '8123'
 CLICKHOUSE_DB_URL = os.environ.get('CLICKHOUSE_DB_URL', f'http://127.0.0.1:{CLICKHOUSE_DB_PORT}')
 CLICKHOUSE_DB_USERNAME = os.environ.get('CLICKHOUSE_DB_USERNAME', 'default')
 CLICKHOUSE_DB_PASS = os.environ.get('CLICKHOUSE_DB_PASS', '')
+CLICKHOUSE_DB_NAME = 'dataclick_stat'
