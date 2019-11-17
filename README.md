@@ -63,9 +63,7 @@ simple project to learn how gather and send statistics from django to clickhouse
 ```
 
 Then visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
-or
-[http://<server-IP>:8000/](http://<server-IP>:8000/).
-You will see statistics of sumulation.
+You will see statistics of the simulation.
 
 # Technical Details:
 IMPORTANT to set --concurrency=1 for celery worker to prevent data collisions in ClickHouse DB because no thread sync implemented. 
