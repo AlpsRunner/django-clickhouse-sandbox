@@ -11,7 +11,6 @@ simple project to learn how gather and send statistics from django to clickhouse
 
 
 # How to install:
-
 ```
   git clone https://github.com/AlpsRunner/django-clickhouse-sandbox.git
   cd django-clickhouse-sandbox
@@ -22,8 +21,12 @@ simple project to learn how gather and send statistics from django to clickhouse
   export CLICKHOUSE_DB_USERNAME='<your clickhouse user name>'
   export CLICKHOUSE_DB_PASS='<your clickhouse user pass>'
 
-  python manage.py makemigrations
-  python manage.py migrate
+  python3 manage.py makemigrations
+  python3 manage.py migrate
+  python3 manage.py fill_db
+  
+  for django commands help:
+    python3 manage.py help
 ```
 
 # How to work with ClickHouse DB:
@@ -66,5 +69,5 @@ Then visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 You will see statistics of the simulation.
 
 # Technical Details:
-IMPORTANT to set --concurrency=1 for celery worker to prevent data collisions in ClickHouse DB because no thread sync implemented. 
+IMPORTANT: set ONLY --concurrency=1 for celery worker to prevent data collisions in ClickHouse DB because no thread sync implemented. 
 
