@@ -27,6 +27,9 @@ simple project to learn how gather and send statistics from django to clickhouse
 ```
 
 # How to install dependencies (Ubuntu):
+
+To install ClickHouse visit [https://clickhouse.yandex/docs/ru/getting_started/](https://clickhouse.yandex/docs/ru/getting_started/).
+
 ```
   celery installation:  
     sudo apt install python-celery-common
@@ -81,9 +84,12 @@ IMPORTANT: set ONLY --concurrency=1 for celery worker to prevent data collisions
 # Known Issue:
 
 If you have error when connecting to ClickHouse DB check <listen_host> setting (Ubuntu):  
-  sudo nano /etc/clickhouse-server/config.xml
+  
+    sudo nano /etc/clickhouse-server/config.xml
     
-    change
-      <!-- <listen_host>0.0.0.0</listen_host> -->
-    to
-      <listen_host>0.0.0.0</listen_host>
+      change
+        <!-- <listen_host>0.0.0.0</listen_host> -->
+      to
+        <listen_host>0.0.0.0</listen_host>
+  
+    sudo systemctl restart clickhouse-server
