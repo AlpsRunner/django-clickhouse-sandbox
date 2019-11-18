@@ -24,9 +24,15 @@ simple project to learn how gather and send statistics from django to clickhouse
   python3 manage.py makemigrations
   python3 manage.py migrate
   python3 manage.py fill_db
+```
+
+# How to install dependencies (Ubuntu):
+```
+  celery installation:  
+    sudo apt install python-celery-common
   
-  for django commands help:
-    python3 manage.py help
+  redis installation:
+    sudo apt install redis
 ```
 
 # How to work with ClickHouse DB:
@@ -46,11 +52,11 @@ simple project to learn how gather and send statistics from django to clickhouse
 
 # How to run in debug mode:
 ```
-  in first terminal:
-     python3 manage.py runserver 0.0.0.0:8000
+  To run celery tasks (2000 user activity sumulation every 1 min  and sending data to clickhouse every 5 min):
+    celery -A dataclick worker -l info -B --concurrency=1  
   
-  in other terminal run celery tasks (user activity sumulation and sending data to clickhouse):
-    celery -A dataclick worker -l -B info --concurrency=1
+  To see django DB and ClickHouse Stat:
+    python3 manage.py runserver 0.0.0.0:8000
 ```
 
 # How to run in prod mode:
@@ -69,5 +75,15 @@ Then visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 You will see statistics of the simulation.
 
 # Technical Details:
+
 IMPORTANT: set ONLY --concurrency=1 for celery worker to prevent data collisions in ClickHouse DB because no thread sync implemented. 
 
+# Known Issue:
+
+If you have error when connecting to ClickHouse DB check <listen_host> setting (Ubuntu):  
+  sudo nano /etc/clickhouse-server/config.xml
+    
+    change
+      <!-- <listen_host>0.0.0.0</listen_host> -->
+    to
+      <listen_host>0.0.0.0</listen_host>
